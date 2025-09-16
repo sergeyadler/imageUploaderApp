@@ -17,7 +17,7 @@ const app = express();
 // CORS
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: `http://localhost:${process.env.PORT}`,
         methods: ["GET", "POST", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
@@ -54,7 +54,7 @@ app.delete("/api/delete/:fileId", async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = 3003;
 app.listen(PORT, () => {
     console.log(`✅ Server running on port ${PORT}`);
 });

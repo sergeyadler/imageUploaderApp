@@ -12,7 +12,7 @@ type AuthParams = {
 export const imageApi = createApi({
     reducerPath: "imageApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:3001"
+        baseUrl: "http://localhost:3003"
     }),
     endpoints: (builder) => ({
         // 1) Получаем параметры подписи с твоего backend (порт 3001 через Vite proxy)
