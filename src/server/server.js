@@ -15,14 +15,15 @@ console.log("IK ENV:", {
 const app = express();
 
 // CORS
-app.use(
-    cors({
-        origin: `http://localhost:${process.env.PORT}`,
-        methods: ["GET", "POST", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-    })
-);
-//app.options("/", cors());
+app.use(cors());
+// app.use(
+//     cors({
+//         origin: `http://localhost:${process.env.PORT}`,
+//         methods: ["GET", "POST", "DELETE", "OPTIONS"],
+//         allowedHeaders: ["Content-Type", "Authorization"],
+//     })
+// );
+//app.options("*", cors());
 
 app.use(express.json());
 
