@@ -1,76 +1,4 @@
-// import { useState } from "react";
-// import { useGetAuthQuery, useUploadImageMutation } from "../features/imageApi";
-//
-// const ImageUploader = () => {
-//     const [file, setFile] = useState<File | null>(null);
-//     const [url, setUrl] = useState<string | null>(null);
-//
-//     // Получаем подпись (token/expire/signature) с бэка
-//     const { data: auth, isFetching: isAuthLoading, refetch } = useGetAuthQuery();
-//
-//     // Мутация прямой загрузки в ImageKit
-//     const [uploadImage, { isLoading: isUploading }] = useUploadImageMutation();
-//
-//     const onSubmit = async (e: React.FormEvent) => {
-//         e.preventDefault();
-//         if (!file) return;
-//
-//         try {
-//             // гарантируем свежие auth-параметры
-//             const authParams = auth ?? (await refetch()).data;
-//             if (!authParams) throw new Error("Не удалось получить параметры подписи");
-//
-//             // собираем FormData ТОЛЬКО с обязательным набором
-//             const form = new FormData();
-//             form.append("file", file);
-//             form.append("fileName", file.name);
-//             form.append("useUniqueFileName", "true");
-//             form.append("folder", "/uploads");
-//             const data = await uploadImage({ formData: form, auth: authParams }).unwrap();
-//             setUrl(data.url);
-//         } catch (err) {
-//             console.error(err);
-//             alert("Upload failed.");
-//         }
-//     };
-//
-//     return (
-//         <div style={{ maxWidth: 520 }}>
-//             <form onSubmit={onSubmit}>
-//                 <input
-//                     type="file"
-//                     accept="image/*"
-//                     onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-//                 />
-//                 <button
-//                     type="submit"
-//                     disabled={!file || isUploading || isAuthLoading}
-//                     style={{ marginLeft: 8 }}
-//                 >
-//                     {isUploading ? "Загружаю..." : "Upload"}
-//                 </button>
-//             </form>
-//
-//             {url && (
-//                 <>
-//                     <p>
-//                         URL:{" "}
-//                         <a href={url} target="_blank" rel="noreferrer">
-//                             {url}
-//                         </a>
-//                     </p>
-//                     <img
-//                         src={url}
-//                         alt="uploaded"
-//                         style={{ maxWidth: "100%", marginTop: 12, borderRadius: 8 }}
-//                     />
-//                 </>
-//             )}
-//         </div>
-//     );
-// };
-//
-// export default ImageUploader;
+
 import React, { useEffect, useState } from "react";
 import { useGetAuthQuery } from "../features/imageApi"; // поправь путь, если у тебя другой
 
@@ -243,7 +171,6 @@ const ImageUploader: React.FC = () => {
 
             {progress > 0 && (
                 <div className="progress">
-                    {/* нативный элемент без стилей; при желании заменишь на свою полоску */}
                     <progress className="progress__native" max={100} value={progress} />
                     <span className="progress__label">{progress}%</span>
                 </div>
