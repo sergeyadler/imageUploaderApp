@@ -1,0 +1,85 @@
+/* ===== Uploader layout ===== */
+.uploader{
+  max-width:960px; margin:24px auto; padding:0 16px;
+}
+.uploader__title{
+  margin:0 0 12px; color:var(--primary);
+}
+
+/* ===== Picker ===== */
+.picker{
+  background:var(--panel); border:1px dashed var(--primary);
+  border-radius:var(--radius); padding:20px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; gap:8px; margin-bottom:16px;
+}
+.picker__hint{ color:var(--muted); font-size:.95rem; }
+
+/* ===== Preview ===== */
+.preview{ display:flex; justify-content:center; margin:12px 0 16px; }
+.preview__img{
+  max-width:420px; max-height:320px; object-fit:contain; border-radius:10px; box-shadow:var(--shadow);
+}
+
+/* ===== History ===== */
+.history{ margin-top:28px; }
+.history__header{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px;
+}
+.history__title{ margin:0; }
+.history__empty{ color:var(--muted); }
+
+/* ===== Grid / Cards ===== */
+.grid{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.card{
+  background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow); display:flex; flex-direction:column; position:relative;
+  animation:fadeIn .25s ease both;
+}
+.card--shrinking{ animation:shrink .25s ease both; }
+
+.card__badge{
+  background:#f0f4fa; color:#334155; font-weight:700; font-size:.8rem;
+  padding:6px 10px;
+  border-top-left-radius:var(--radius); border-top-right-radius:var(--radius);
+}
+
+.card__media{ position:relative; min-height:160px; cursor:pointer; }
+.card__img{
+  width:100%; height:160px; object-fit:cover; display:block;
+}
+
+.skeleton{
+  position:absolute; inset:0; border-radius:0;
+  background:linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite linear;
+}
+
+.card__title{
+  padding:10px; font-weight:600; font-size:.95rem;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+.card__delete{
+  position:absolute; top:8px; right:8px;
+  border:none; background:rgba(255,255,255,.95);
+  width:30px; height:30px; border-radius:50%;
+  display:grid; place-items:center; cursor:pointer; box-shadow:var(--shadow);
+}
+
+/* ===== Lightbox ===== */
+.lightbox{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.8); z-index:1000; animation:fadeIn .25s ease both;
+}
+.lightbox--closing{ animation:fadeOut .25s ease both; }
+.lightbox__img{
+  max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,.35);
+}
+
+/* ===== Small helpers ===== */
+.uploader .btn{ margin-top:4px; }
