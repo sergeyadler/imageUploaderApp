@@ -140,7 +140,7 @@ const ImageUploader: React.FC = () => {
 
     return (
         <div className="uploader">
-            <h1 className="uploader__title">ImageKit uploader</h1>
+            <h1 className="uploader__title">ImageUploaderApp</h1>
 
             <div className="picker">
                 <input

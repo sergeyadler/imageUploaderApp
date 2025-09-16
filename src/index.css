@@ -1,68 +1,174 @@
-/* ===== Base reset & variables ===== */
-:root{
-  --bg:#f7f8fa;
-  --panel:#ffffff;
-  --text:#111827;
-  --muted:#6b7280;
-  --primary:#1976d2;
-  --primary-600:#1565c0;
-  --danger:#e53935;
-  --border:#e5e7eb;
-  --shadow:0 4px 12px rgba(0,0,0,.08);
-  --radius:12px;
+/* ================================
+   Base reset • Design tokens 2025
+   ================================ */
+
+:root {
+  /* Palette (light) */
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --panel-elevated: #ffffff;
+  --text: #0f172a;         /* slate-900 */
+  --muted: #64748b;        /* slate-500 */
+  --border: #e6e8f0;       /* neutral border */
+  --primary: #2563eb;      /* blue-600 */
+  --primary-600: #1d4ed8;  /* blue-700 */
+  --primary-50: #eef2ff;
+  --danger: #ef4444;
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, .06);
+  --shadow: 0 8px 24px rgba(2, 6, 23, .08);
+  --shadow-lg: 0 12px 32px rgba(2, 6, 23, .12);
+
+  /* Radii & spacing */
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  /* Motion & misc */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --duration: .25s;
+
+  color-scheme: light dark;
 }
 
-*{ box-sizing:border-box; }
-html,body,#root{ height:100%; }
-body{
-  margin:0;
-  font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-  color:var(--text);
-  background:var(--bg);
+/* Dark tokens (system-driven by default) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1020;               /* deep navy */
+    --panel: #0f1528;
+    --panel-elevated: #111933;
+    --text: #e6e9ef;
+    --muted: #9aa3b2;
+    --border: #1f2640;
+    --primary: #60a5fa;
+    --primary-600: #3b82f6;
+    --primary-50: #0b1224;
+    --danger: #f87171;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.35);
+    --shadow: 0 10px 24px rgba(0,0,0,.45);
+    --shadow-lg: 0 16px 40px rgba(0,0,0,.55);
+  }
+}
+
+/* ===== Manual theme overrides via [data-theme] ===== */
+:root[data-theme="light"] {
+  --bg:#f6f7fb; --panel:#ffffff; --panel-elevated:#fff;
+  --text:#0f172a; --muted:#64748b; --border:#e6e8f0;
+  --primary:#2563eb; --primary-600:#1d4ed8; --primary-50:#eef2ff;
+  --danger:#ef4444;
+  --shadow-sm:0 1px 2px rgba(2, 6, 23, .06);
+  --shadow:0 8px 24px rgba(2, 6, 23, .08);
+  --shadow-lg:0 12px 32px rgba(2, 6, 23, .12);
+}
+:root[data-theme="dark"] {
+  --bg:#0b1020; --panel:#0f1528; --panel-elevated:#111933;
+  --text:#e6e9ef; --muted:#9aa3b2; --border:#1f2640;
+  --primary:#60a5fa; --primary-600:#3b82f6; --primary-50:#0b1224;
+  --danger:#f87171;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.35);
+  --shadow:0 10px 24px rgba(0,0,0,.45);
+  --shadow-lg:0 16px 40px rgba(0,0,0,.55);
+}
+
+/* ===== Reset-ish ===== */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Links */
-a{ color:var(--primary); text-decoration:none; }
-a:hover{ text-decoration:underline; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-/* Buttons */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  gap:.5rem; padding:.65rem 1rem; border:1px solid transparent;
-  border-radius:10px; background:#e5e7eb; color:#111;
-  cursor:pointer; transition:.2s ease;
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary), transparent 30%);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
-.btn:hover{ filter:brightness(0.98); }
-.btn:disabled{ opacity:.6; cursor:not-allowed; }
 
-.btn--primary{ background:var(--primary); color:#fff; }
-.btn--primary:hover{ background:var(--primary-600); }
-
-.btn--danger{ background:var(--danger); color:#fff; }
-.btn--danger:hover{ filter:brightness(.95); }
-
-/* Native progress */
-.progress{ display:flex; align-items:center; gap:.5rem; margin:12px 0 0; }
-.progress__native{
-  width:100%; height:10px; appearance:none;
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: .5rem; padding: .7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration) var(--ease),
+  box-shadow var(--duration) var(--ease),
+  background var(--duration) var(--ease),
+  border-color var(--duration) var(--ease),
+  filter var(--duration) var(--ease);
 }
-.progress__label{ font-size:.85rem; color:var(--muted); }
+.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
 
-/* Chrome/Safari */
-.progress__native::-webkit-progress-bar{ background:#e5e7eb; border-radius:999px; }
-.progress__native::-webkit-progress-value{ background:var(--primary); border-radius:999px; transition:width .2s ease; }
-/* Firefox */
-.progress__native::-moz-progress-bar{ background:var(--primary); border-radius:999px; }
-
-/* Utilities */
-.is-hidden{ opacity:0; visibility:hidden; transform:scale(.98); }
-.is-visible{ opacity:1; visibility:visible; transform:scale(1); transition:opacity .35s ease, transform .35s ease; }
-
-/* Animations & skeleton */
-@keyframes shimmer {
-  0% { background-position:-200% 0; }
-  100% { background-position:200% 0; }
+.btn--primary {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(180deg, var(--primary), var(--primary-600));
 }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-@keyframes fadeOut { from{opacity:1} to{opacity:0} }
-@keyframes shrink { from{opacity:1; transform:scale(1)} to{opacity:0; transform:scale(.92)} }
+.btn--primary:hover { filter: saturate(1.05) brightness(1.02); }
+
+.btn--danger {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(180deg, var(--danger), color-mix(in srgb, var(--danger), #000 10%));
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border);
+}
+.btn--ghost:hover {
+  background: color-mix(in srgb, var(--panel), transparent 30%);
+}
+
+/* Theme toggle group */
+.theme-toggle { display: inline-flex; gap: .4rem; }
+.theme-toggle .is-active {
+  border-color: color-mix(in srgb, var(--primary), var(--border) 40%);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== Progress (native polished) ===== */
+.progress { display: flex; align-items: center; gap: .5rem; margin-top: .75rem; }
+.progress__native {
+  width: 100%; height: 10px; appearance: none; accent-color: var(--primary);
+  border-radius: 999px; overflow: hidden; background: var(--border);
+}
+.progress__label { font-size: .85rem; color: var(--muted); }
+.progress__native::-webkit-progress-bar { background: var(--border); }
+.progress__native::-webkit-progress-value {
+  background: linear-gradient(90deg, var(--primary-600), var(--primary));
+  transition: width .2s var(--ease);
+}
+.progress__native::-moz-progress-bar {
+  background: linear-gradient(90deg, var(--primary-600), var(--primary));
+  transition: width .2s var(--ease);
+}
+
+/* ===== Utilities ===== */
+.is-hidden { opacity: 0; visibility: hidden; transform: scale(.98); }
+.is-visible { opacity: 1; visibility: visible; transform: scale(1); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+
+/* ===== Animations ===== */
+@keyframes shimmer { 0% { background-position:-200% 0 } 100% { background-position:200% 0 } }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes fadeOut { from { opacity: 1 } to { opacity: 0 } }
+@keyframes shrink { from { opacity: 1; transform: scale(1) } to { opacity: 0; transform: scale(.92) } }
+
+/* Motion respect */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
